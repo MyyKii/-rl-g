@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Örlög – Runenkrieg</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Örlög – Runenkrieg</h1>
+
+        <div id="leben-player">Dein Leben: </div>
+        <div id="leben-enemy">Gegner: </div>        
+
+        <div id="dice-result">Würfle die Runen...</div>
+
+        <button id="roll-btn">Würfeln 🎲</button>
+
+        <button id="lose_hp">HP abziehen</button>
+        <button id="add_hp">HP hinzufügen</button>
+        <button id="restart">Neu starten</button>
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
