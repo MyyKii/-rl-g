@@ -13,17 +13,28 @@ class Game:
         return{
         "player_1_hp": self.player_1_hp,
         "player_2_hp": self.player_2_hp,
-        #"turn": self.active_player
+        "active_player": self.active_player
         }
 
     def roll_dice(self, num_dice=6):
         return [random.choice(self.DICE_SYMBOLS) for _ in range(num_dice)]
 
-    def add_hp(self, who="player_1", amount = 5):
-        if who == "player_1": 
-            self.player_1_hp += amount
+    def add_hp(self, who, amount=5):
+        if self.game_terminated:
+            return "Spiel ist vorbei"
+
+        if who == "player_1" and self.active_player != 1:
+         return "Nicht dein Zug!"
+        if who == "player_2" and self.active_player != 2:
+         return "Nicht dein Zug!"
+
+        if who == "player_1":
+         self.player_1_hp += amount
         elif who == "player_2":
-            self.player_2_hp += amount
+         self.player_2_hp += amount
+
+        return None
+
 
     def lose_hp(self, who):
         damage = random.randint(1, 5)

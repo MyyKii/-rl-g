@@ -3,22 +3,23 @@ function updateStatus() {
     fetch("/status")
         .then(res => res.json())
         .then(data => {
-            document.getElementById("leben-player").innerText = `Dein Leben: ${data.player_1_hp}`;
-            document.getElementById("leben-enemy").innerText = `Gegner: ${data.player_2_hp}`;
+            document.getElementById("leben-player-1").innerText = `Spieler 1: ${data.player_1_hp} HP`;
+            document.getElementById("leben-player-2").innerText = `Spieler 2: ${data.player_2_hp} HP`;
 
-            // Spielende prüfen
-            if (data.player_hp <= 0) {
-                alert("Game Over! Der Gegner hat gewonnen 😢");
-                disableGame();
-            } else if (data.enemy_hp <= 0) {
-                alert("Du hast gewonnen! 🎉");
-                disableGame();
-            }
+            // 🆕 Aktiven Spieler anzeigen
+            const activePlayer = data.active_player === 1 ? "Spieler 1" : "Spieler 2";
+            document.getElementById("active-player-info").innerText = `Aktiver Spieler: ${activePlayer}`;
+
+            // Optional: Buttons deaktivieren, wenn nicht dran
+            document.getElementById("turn_1").disabled = data.active_player !== 1;
+            document.getElementById("turn_2").disabled = data.active_player !== 2;
+
         })
         .catch(err => {
             console.error("Status konnte nicht geladen werden:", err);
         });
 }
+
 
 // Buttons deaktivieren bei Spielende
 function disableGame() {
