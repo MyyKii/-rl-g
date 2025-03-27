@@ -3,8 +3,8 @@ function updateStatus() {
     fetch("/status")
         .then(res => res.json())
         .then(data => {
-            document.getElementById("leben-player").innerText = `Dein Leben: ${data.player_hp}`;
-            document.getElementById("leben-enemy").innerText = `Gegner: ${data.enemy_hp}`;
+            document.getElementById("leben-player").innerText = `Dein Leben: ${data.player_1_hp}`;
+            document.getElementById("leben-enemy").innerText = `Gegner: ${data.player_2_hp}`;
 
             // Spielende prüfen
             if (data.player_hp <= 0) {
@@ -86,5 +86,25 @@ document.getElementById("restart").addEventListener("click", () => {
         })
         .catch(err => {
             console.error("Fehler beim Neustart:", err);
+        });
+});
+
+document.getElementById("turn_1").addEventListener("click", () => {
+    fetch("/turn_1", { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+            updateStatus();
+            if (data.status) alert(data.status);
+        });
+});
+
+document.getElementById("turn_2").addEventListener("click", () => {
+    fetch("/turn_2", { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+            updateStatus();
+            if (data.status) alert(data.status);
         });
 });
