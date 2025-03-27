@@ -21,7 +21,7 @@ def roll():
 
 @app.route("/lose", methods=["POST"])
 def lose_hp():
-    result = game.lose_hp("player", 3)
+    result = game.lose_hp("player")
     return jsonify({
         "message": "HP reduziert",
         "player_hp": game.player_hp,

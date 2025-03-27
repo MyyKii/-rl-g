@@ -16,12 +16,13 @@ class Game:
     def roll_dice(self, num_dice=6):
         return [random.choice(self.DICE_SYMBOLS) for _ in range(num_dice)]
     
-    def lose_hp(self, who="player", amount=3):
-        if self.player_hp <= 0: return "Verloren"
+    def lose_hp(self, who="player"):
+        #if self.player_hp <= 0: return "Verloren"
+        damage = random.randint(1,5)
         if who == "player":
-            self.player_hp -= amount
+            self.player_hp -= damage
         elif who == "enemy":
-            self.enemy_hp -= amount
+            self.enemy_hp -= damage
         return self.end_game()
     
     def add_hp(self, who="player", amount = 5):
@@ -29,7 +30,6 @@ class Game:
             self.player_hp += amount
         elif who == "enemy":
             self.enemy_hp += amount
-
 
     def end_game(self):
         if self.player_hp <= 0:
