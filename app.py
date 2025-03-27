@@ -37,5 +37,12 @@ def add_hp():
         "status": result  # z. B. "Du hast gewonnen!" oder None
     })
 
+@app.route("/restart", methods=["POST"])
+def restart():
+    global game
+    game = Game()  # Erzeugt ein neues Spielobjekt
+    return jsonify({"message": "Spiel wurde neu gestartet"})
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -72,3 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.getElementById("restart").addEventListener("click", () => {
+    fetch("/restart", { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message); // "Spiel wurde neu gestartet"
+            updateStatus();
+
+            // Buttons wieder aktivieren
+            document.getElementById("roll-btn").disabled = false;
+            document.getElementById("lose_hp").disabled = false;
+            document.getElementById("add_hp").disabled = false;
+        })
+        .catch(err => {
+            console.error("Fehler beim Neustart:", err);
+        });
+});
